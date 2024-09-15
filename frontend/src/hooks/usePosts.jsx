@@ -41,10 +41,15 @@ export default function usePosts() {
 
   const addPost = () => {
     setCounter(counter + 1);
-    setPosts((prevPosts) => [...prevPosts, { id: uuidv4(), title: `Post` }]);
+    const id = uuidv4();
+    setPosts((prevPosts) => [
+      ...prevPosts,
+      { id: id, title: `Post-${id.substring(0, 4)}` },
+    ]);
   };
-  const deleteFirstPost = () => {
-    setPosts((prevPosts) => prevPosts.slice(1));
+
+  const deleteFirstPost = (numberOfPosts = 1) => {
+    setPosts((prevPosts) => prevPosts.slice(numberOfPosts));
   };
 
   return { posts, error, addPost, deleteFirstPost, isLoading };
